@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app elevation="0" flat dense class="rounded-2">
       <v-app-bar-nav-icon @click="open = !open"></v-app-bar-nav-icon>
-      <v-app-bar-title>Home > Path</v-app-bar-title>
+      <v-app-bar-title>Home > Path > aaa</v-app-bar-title>
     </v-app-bar>
     <v-navigation-drawer app dark :value="open" style="background: rgb(49, 79, 98);">
 
