@@ -1,13 +1,18 @@
 <template>
   <v-app>
-    <v-app-bar app elevation="0" flat dense class="rounded-2">
+    <v-app-bar app elevation="0"
+               dense color="transparent"
+    >
       <v-app-bar-nav-icon @click="open = !open"></v-app-bar-nav-icon>
-      <v-app-bar-title>Home > Path > aaa</v-app-bar-title>
+      <v-app-bar-title>
+        <section-title></section-title>
+      </v-app-bar-title>
+
     </v-app-bar>
     <v-navigation-drawer app dark :value="open" style="background: rgb(49, 79, 98);">
 
       <v-sheet color="transparent" class="text-center py-2">
-        <v-icon size="30" class="grey--text text--lighten-3">mdi-state-machine</v-icon>
+        <v-icon size="30" class="grey--text text--lighten-3">mdi-meteor</v-icon>
         <v-sheet color="transparent"
                  class="yellow--text text--lighten-2 text-body-1 font-weight-bold"
         >ADMINISTRATION</v-sheet>
@@ -27,25 +32,26 @@
 
     </v-navigation-drawer>
     <v-main>
+
       <router-view></router-view>
     </v-main>
     <v-footer app inset>
-      <v-container>
-        <v-sheet class="text-center text-overline transparent" style="color: gray">
-          <v-icon class="text-body-2">mdi-copyright</v-icon>
-          Korea National University of Arts K-Aco
-        </v-sheet>
-      </v-container>
+      <v-sheet class="text-center text-overline transparent" style="color: gray">
+        <v-icon class="text-body-2">mdi-copyright</v-icon>
+        Korea National University of Arts K-Aco
+      </v-sheet>
     </v-footer>
   </v-app>
 </template>
 
 <script>
   import GlobalMenu from "@/components/GlobalMenu.vue";
+  import SectionTitle from "@/components/SectionTitle.vue";
   export default {
     name: 'App',
     components: {
-      GlobalMenu
+      GlobalMenu,
+      SectionTitle
     },
     data: function () {
       return {

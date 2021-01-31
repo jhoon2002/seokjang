@@ -1,15 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Blank from "@/views/Blank.vue";
+import Mock from "@/views/Mock.vue";
 
 Vue.use(VueRouter)
-
-let BlankVue = {
-  template: "<router-view></router-view>",
-};
-
-let MockVue = {
-  template: '<div class="content">{{this.$route.matched[this.$route.matched.length-1].name}}</div>',
-};
 
 // const Test = () => import("@/views/admin/Test.vue");
 
@@ -17,7 +11,7 @@ const routes = [
       {
         name: "교직원관리",
         path: "/admin/user",
-        component: MockVue,
+        component: Blank,
         isShow: false,
         isOn: false,
         meta: { isDirectory: true },
@@ -25,7 +19,7 @@ const routes = [
           {
             name: "교직원내역",
             path: "/admin/user/employee",
-            component: MockVue,
+            component: () => import("@/views/Mock"),
             props: true,
             isShow: false,
             isOn: false,
@@ -34,14 +28,14 @@ const routes = [
           {
             name: "권한관리",
             path: "/admin/user/acl",
-            component: MockVue,
+            component: Mock,
             isShow: false,
             isOn: false
           },
           {
             name: "테스트",
             path: "/admin/user/test",
-            component: MockVue,
+            component: Mock,
             isShow: false,
             isOn: false
           }
@@ -50,7 +44,7 @@ const routes = [
       {
         name: "인사관리",
         path: "/admin/person",
-        component: MockVue,
+        component: Blank,
         isShow: false,
         isOn: false,
         meta: {
@@ -60,14 +54,14 @@ const routes = [
             {
               name: "인사기록카드",
               path: "/admin/person/card",
-              component: MockVue,
+              component: Mock,
               isShow: false,
               isOn: false,
             },
             {
             name: "증명서",
             path: "/admin/person/certi",
-            component: MockVue,
+            component: Blank,
             isShow: false,
             isOn: false,
             meta: {
@@ -76,14 +70,14 @@ const routes = [
             children: [{
               name: "증명서현황",
               path: "/admin/person/certi/list",
-              component: MockVue,
+              component: Mock,
               isShow: false,
               isOn: false
             },
               {
                 name: "증명서작성",
                 path: "/admin/person/certi/wirte",
-                component: MockVue,
+                component: Mock,
                 isShow: false,
                 isOn: false
               }
@@ -92,7 +86,7 @@ const routes = [
           {
             name: "급여",
             path: "/admin/person/pay",
-            component: MockVue,
+            component: Blank,
             isShow: false,
             isOn: false,
             meta: {
@@ -101,14 +95,14 @@ const routes = [
             children: [{
               name: "급여현황",
               path: "/admin/person/pay/list",
-              component: MockVue,
+              component: Mock,
               isShow: false,
               isOn: false
             },
               {
                 name: "급여입력",
                 path: "/admin/person/pay/write",
-                component: MockVue,
+                component: Mock,
                 isShow: false,
                 isOn: false
               }
@@ -119,7 +113,7 @@ const routes = [
       {
         name: "복무관리",
         path: "/admin/work",
-        component: MockVue,
+        component: Blank,
         isShow: false,
         isOn: false,
         meta: {
@@ -128,7 +122,7 @@ const routes = [
         children: [{
           name: "휴가",
           path: "/admin/work/off",
-          component: BlankVue,
+          component: Blank,
           isShow: false,
           isOn: false,
           meta: {
@@ -137,14 +131,14 @@ const routes = [
           children: [{
             name: "휴가설정",
             path: "/admin/work/off/set",
-            component: MockVue,
+            component: Mock,
             isShow: false,
             isOn: false
           },
             {
               name: "휴가현황",
               path: "/admin/work/off/book-list",
-              component: MockVue,
+              component: Mock,
               isShow: false,
               isOn: false
             }
@@ -153,7 +147,7 @@ const routes = [
           {
             name: "시간외근무",
             path: "/admin/work/overtime",
-            component: BlankVue,
+            component: Blank,
             isShow: false,
             isOn: false,
             meta: {
@@ -162,14 +156,14 @@ const routes = [
             children: [{
               name: "시간외근무설정",
               path: "/admin/work/overtime/set",
-              component: MockVue,
+              component: Mock,
               isShow: false,
               isOn: false
             },
               {
                 name: "시간외근무현황",
                 path: "/admin/work/overtime/pre-list",
-                component: MockVue,
+                component: Mock,
                 isShow: false,
                 isOn: false
               }
@@ -178,7 +172,7 @@ const routes = [
           {
             name: "출장",
             path: "/admin/work/trip",
-            component: BlankVue,
+            component: Blank,
             isShow: false,
             isOn: false,
             meta: {
@@ -187,7 +181,7 @@ const routes = [
             children: [{
               name: "출장현황",
               path: "/admin/work/trip/list",
-              component: MockVue,
+              component: Mock,
               isShow: false,
               isOn: false
             }]
@@ -197,7 +191,7 @@ const routes = [
       {
         name: "규정/양식관리",
         path: "/admin/law",
-        component: MockVue,
+        component: Blank,
         isShow: false,
         isOn: false,
         meta: {
@@ -206,7 +200,7 @@ const routes = [
         children: [{
           name: "규정",
           path: "/admin/law/rule",
-          component: MockVue,
+          component: Mock,
           isShow: false,
           isOn: false,
         },
