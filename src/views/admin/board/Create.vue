@@ -1,77 +1,87 @@
 <template>
+    <div>
     <validation-observer
             ref="observer"
-            v-slot="{  }"
+            v-slot="{ invalid, validated, handleSubmit, validate }"
     >
-        <form @submit.prevent="submit">
+        <v-form>
             <v-container>
                 <v-row>
                     <v-col>
-                        <v-card class="pa-10">
-
-                            <validation-provider v-slot="{ errors }" name="ID" :rules="{required: true}">
-                                <v-select v-model="boardid" :error-messages="errors"
-                                          prepend-icon="mdi-clipboard-edit-outline" label="게시판ID"
-                                          :items="['free', 'notice', 'qna']"
+                            <validation-provider name="게시판ID" :rules="{ required: true }" v-slot="{ errors, valid }">
+                                <v-select label="게시판ID" v-model="boardid" :items="['free', 'notice', 'qna']"
+                                          :error-messages="errors" :success="valid"
+                                          prepend-icon="mdi-clipboard-edit-outline"
                                 ></v-select>
                             </validation-provider>
-                            <validation-provider v-slot="{ errors }" name="ID" :rules="{required: true}">
-                                <v-text-field v-model="userid" :error-messages="errors"
+                            <validation-provider name="ID" :rules="{ required: true }" v-slot="{ errors, valid }">
+                                <v-text-field label="ID" v-model="userid"
+                                              :error-messages="errors" :success="valid"
                                               prepend-icon="mdi-card-account-details-outline"
-                                              label="ID"
                                 ></v-text-field>
                             </validation-provider>
 
-                            <validation-provider v-slot="{ errors }" name="ID" :rules="{required: true}">
-                                <v-text-field v-model="name" :error-messages="errors"
-                                              prepend-icon="mdi-account-edit-outline" label="이름"
+                            <validation-provider name="이름" :rules="{ required: true }" v-slot="{ errors, valid }">
+                                <v-text-field label="이름" v-model="name"
+                                              :error-messages="errors" :success="valid"
+                                              prepend-icon="mdi-account-edit-outline"
                                 ></v-text-field>
                             </validation-provider>
 
-                            <validation-provider v-slot="{ errors }" name="ID" :rules="{required: true}">
-                                <v-text-field v-model="subject" :error-messages="errors"
-                                              prepend-icon="mdi-page-layout-header" label="제목"
+                            <validation-provider name="제목" :rules="{ required: true }" v-slot="{ errors, valid }">
+                                <v-text-field label="제목" v-model="subject"
+                                              :error-messages="errors" :success="valid"
+                                              prepend-icon="mdi-page-layout-header"
                                 ></v-text-field>
                             </validation-provider>
 
-                            <validation-provider v-slot="{ errors }" name="ID" :rules="{required: true}">
-                                <v-textarea v-model="content" :error-messages="errors"
-                                            prepend-icon="mdi-page-layout-body" label="내용"
+                            <validation-provider name="내용" :rules="{ required: true }" v-slot="{ errors, valid }">
+                                <v-textarea label="내용" v-model="content"
+                                            :error-messages="errors" :success="valid"
+                                            prepend-icon="mdi-page-layout-body"
                                 ></v-textarea>
                             </validation-provider>
 
-                            <validation-provider v-slot="{ errors }" name="ID" :rules="{required: true}">
-                                <v-file-input v-model="file" :error-messages="errors"
-                                              label="파일"
+                            <validation-provider name="파일" :rules="{ required: true }" v-slot="{ errors, valid }">
+                                <v-file-input label="파일" v-model="file"
+                                              :error-messages="errors" :success="valid"
                                 ></v-file-input>
                             </validation-provider>
 
                             <div class="text-right">
-                                <v-btn class="mt-5"
-                                       type="submit"
-                                >확인</v-btn>
-
+                                <v-btn class="mr-4" @click="clear">초기화</v-btn>
+                                <v-btn class="mr-4" @click="validate()">Validate</v-btn>
+                                <v-btn color="primary" @click="handleSubmit(submit)">확인</v-btn>
                             </div>
-                        </v-card>
                     </v-col>
                     <v-col></v-col>
                     <v-col></v-col>
                 </v-row>
             </v-container>
-        </form>
+        </v-form>
     </validation-observer>
+    </div>
 </template>
 <script>
     export default {
         data: function() {
             return {
-                userid: ""
+                boardid: "",
+                userid: "",
+                name: "",
+                subject: "",
+                content: "",
+                file: ""
             }
         },
         methods: {
-            submit () {
-                this.$refs.observer.validate();
-            }
+            // submit () {
+            //     this.$refs.observer.validate();
+            // },
+            // onSubmit(event) {
+            //         event.preventDefault();
+            //     //alert("Form submitted!");
+            // }
         }
     }
 </script>
