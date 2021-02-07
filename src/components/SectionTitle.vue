@@ -27,6 +27,13 @@ ul {
 ul li {
     display: inline-block;
 }
+ul li:after {
+    content: "\F0142";
+    font-family: "Material Design Icons";
+}
+ul li:last-child:after {
+    content: "";
+}
 ul li:first-child,
 ul li:nth-child(2) {
     /*

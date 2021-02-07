@@ -1,0 +1,8 @@
+button.v-pagination__item,
+button.v-pagination__navigation{
+  box-shadow: none;
+  /*font-style: italic;*/
+}
+button.v-pagination__item--active {
+  font-weight: bold;
+}

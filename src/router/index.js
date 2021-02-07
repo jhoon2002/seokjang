@@ -9,7 +9,43 @@ Vue.use(VueRouter)
 
 const routes = [
       {
+        name: "첫화면",
+        path: "/",
+        component: Blank,
+        invisible: true
+      },
+      {
+        name: "게시판관리",
+        icon: "mdi-view-headline",
+        path: "/admin/board",
+        component: Blank,
+        isShow: false,
+        isOn: false,
+        meta: { isDirectory: true },
+        children: [
+          {
+            name: "글쓰기",
+            path: "/admin/board/create",
+            component: () => import("@/views/admin/board/Create.vue"),
+            props: true,
+            isShow: false,
+            isOn: false,
+            meta: { model: "board" }
+          },
+          {
+            name: "자유게시판",
+            path: "/admin/board/boardA",
+            component: () => import("@/views/admin/Board.vue"),
+            props: true,
+            isShow: false,
+            isOn: false,
+            meta: { model: "board" }
+          }
+        ]
+      },
+      {
         name: "교직원관리",
+        icon: "mdi-card-account-details-outline",
         path: "/admin/user",
         component: Blank,
         isShow: false,
@@ -19,7 +55,7 @@ const routes = [
           {
             name: "교직원내역",
             path: "/admin/user/employee",
-            component: () => import("@/views/Mock"),
+            component: () => import("@/views/admin/Employee.vue"),
             props: true,
             isShow: false,
             isOn: false,
@@ -43,6 +79,7 @@ const routes = [
       },
       {
         name: "인사관리",
+        icon: "mdi-account-circle",
         path: "/admin/person",
         component: Blank,
         isShow: false,
@@ -112,6 +149,7 @@ const routes = [
       },
       {
         name: "복무관리",
+        icon: "mdi-bus-multiple",
         path: "/admin/work",
         component: Blank,
         isShow: false,
@@ -190,6 +228,7 @@ const routes = [
       },
       {
         name: "규정/양식관리",
+        icon: "mdi-book-open-variant",
         path: "/admin/law",
         component: Blank,
         isShow: false,
@@ -207,14 +246,328 @@ const routes = [
           {
             name: "양식",
             path: "/admin/law/form",
-            component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+            component: () => import('../views/About.vue'),
             isShow: false,
             isOn: false,
           }
         ]
       }
 ];
-
+/*
+const routes = [
+  {
+    name: "첫화면",
+    icon: "mdi-home",
+    path: "/",
+    component: Mock,
+    invisible: true
+  },
+  {
+  name: "전자문서",
+    icon: "mdi-file-document-edit-outline",
+  path: "/docu",
+  component: Blank,
+  isShow: false,
+  isOn: false,
+  meta: {
+    isDirectory: true
+  },
+  children: [{
+    name: "문서작성",
+    path: "/docu/write",
+    component: Mock,
+    meta: {
+      title: "문서작성",
+    },
+    isShow: false,
+    isOn: false
+  },
+    {
+      name: "처리할 문서",
+      path: "/docu/confirm",
+      component: Blank,
+      meta: {
+        isDirectory: true,
+      },
+      isShow: false,
+      isOn: false,
+      children: [{
+        name: "결재대기함",
+        path: "/docu/confirm/standby",
+        component: Mock,
+        isShow: false,
+        isOn: false,
+      },
+        {
+          name: "발송대기함",
+          path: "/docu/confirm/send",
+          component: Mock,
+          isShow: false,
+          isOn: false,
+        },
+      ],
+    },
+    {
+      name: "처리한 문서",
+      path: "/docu/confirmed",
+      component: Blank,
+      meta: {
+        isDirectory: true,
+      },
+      isShow: false,
+      isOn: false,
+      children: [{
+        name: "완료문서함",
+        path: "/docu/confirmed/complete",
+        component: Mock,
+        isShow: false,
+        isOn: false,
+      },
+        {
+          name: "진행문서함",
+          path: "/docu/confirmed/progress",
+          component: Mock,
+          isShow: false,
+          isOn: false,
+        },
+      ],
+    },
+    {
+      name: "공유/공람",
+      path: "/docu/share",
+      component: Blank,
+      meta: {
+        isDirectory: true,
+      },
+      isShow: false,
+      isOn: false,
+      children: [{
+        name: "받은문서",
+        path: "/docu/share/receive",
+        component: Mock,
+        isShow: false,
+        isOn: false,
+      },
+        {
+          name: "지정문서",
+          path: "/docu/share/assign",
+          component: Mock,
+          isShow: false,
+          isOn: false,
+        },
+      ],
+    },
+    {
+      name: "문서등록대장",
+      path: "/docu/docu-list",
+      component: Mock,
+      isShow: false,
+      isOn: false,
+    },
+    {
+      name: "비전자문서등록",
+      path: "/docu/none-elec",
+      component: Mock,
+      isShow: false,
+      isOn: false,
+    }
+  ]
+},
+  {
+    name: "복무관리",
+    icon: "mdi-airplane",
+    path: "/work",
+    component: Blank,
+    isShow: false,
+    isOn: false,
+    meta: {
+      isDirectory: true
+    },
+    children: [{
+      name: "처리할 복무",
+      path: "/work/confirm",
+      component: Mock,
+      isShow: false,
+      isOn: false
+    },
+      {
+        name: "시간외근무",
+        path: "/work/overtime",
+        component: Blank,
+        meta: {
+          isDirectory: true,
+        },
+        isShow: false,
+        isOn: false,
+        children: [{
+          name: "사전신청",
+          path: "/work/overtime/pre",
+          component: Mock,
+          isShow: false,
+          isOn: false,
+        },
+          {
+            name: "사전신청내역",
+            path: "/work/overtime/pre-list",
+            component: Mock,
+            isShow: false,
+            isOn: false,
+          },
+          {
+            name: "출근/퇴근지정",
+            path: "/work/overtime/set",
+            component: Mock,
+            isShow: false,
+            isOn: false,
+          },
+          {
+            name: "시간외내역",
+            path: "/work/overtime/overtime-list",
+            component: Mock,
+            isShow: false,
+            isOn: false,
+          },
+        ],
+      },
+      {
+        name: "출장",
+        path: "/work/trip",
+        component: Blank,
+        meta: {
+          isDirectory: true,
+        },
+        isShow: false,
+        isOn: false,
+        children: [{
+          name: "관내출장",
+          path: "/work/trip/inside",
+          component: Mock,
+          isShow: false,
+          isOn: false,
+        },
+          {
+            name: "국내출장",
+            path: "/work/trip/domestic",
+            component: Mock,
+            isShow: false,
+            isOn: false,
+          },
+          {
+            name: "국외출장",
+            path: "/work/trip/foreign",
+            component: Mock,
+            isShow: false,
+            isOn: false,
+          },
+          {
+            name: "출장내역",
+            path: "/work/trip/trip-list",
+            component: Mock,
+            isShow: false,
+            isOn: false,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "규정/양식",
+    icon: "mdi-book-open-variant",
+    path: "/law",
+    component: Blank,
+    isShow: false,
+    isOn: false,
+    meta: {
+      isDirectory: true
+    },
+    children: [{
+      name: "법령/규정/지침",
+      path: "/law/rule",
+      component: Mock,
+      isShow: false,
+      isOn: false,
+    },
+      {
+        name: "각종양식",
+        path: "/law/form",
+        component: Mock,
+        isShow: false,
+        isOn: false,
+      },
+    ],
+  },
+  {
+    name: "커뮤니티",
+    icon: "mdi-human-male-male",
+    path: "/comm",
+    component: Blank,
+    isShow: false,
+    isOn: false,
+    meta: {
+      isDirectory: true
+    },
+    children: [{
+      name: "공지사항",
+      path: "/comm/notice",
+      component: Mock,
+      isShow: false,
+      isOn: false,
+    },
+      {
+        name: "질의답변",
+        path: "/comm/qna",
+        component: Mock,
+        isShow: false,
+        isOn: false,
+      },
+    ],
+  },
+  {
+    name: "인사/급여",
+    icon: "mdi-face-recognition",
+    path: "/person",
+    component: Blank,
+    isShow: false,
+    isOn: false,
+    meta: {
+      isDirectory: true
+    },
+    children: [{
+      name: "인사정보",
+      path: "/person/info",
+      component: Mock,
+      isShow: false,
+      isOn: false,
+    },
+      {
+        name: "급여내역",
+        path: "/person/pay",
+        component: Mock,
+        isShow: false,
+        isOn: false,
+      },
+    ],
+  },
+  {
+    name: "사용자등록1",
+    path: "/regist1",
+    component: Mock,
+    invisible: true
+  },
+  {
+    name: "사용자등록2",
+    path: "/regist2",
+    component: Mock,
+    invisible: true
+  },
+  {
+    name: "로그인",
+    path: "/login",
+    component: Mock,
+    invisible: true
+  },
+];
+ */
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
